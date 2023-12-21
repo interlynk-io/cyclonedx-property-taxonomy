@@ -41,7 +41,7 @@ See [CycloneDX official documentation](https://github.com/CycloneDX/cyclonedx-pr
 | `interlynk:component:source`       | Source of the component         |
 | `interlynk:component:source_id`    | Identifier of the source        |
 
-## `interlynk:vulnerability`
+## `interlynk:service`
 
 | Property Name                     | Description                      |
 | --------------------------------- | ---------------------------------|
