@@ -35,11 +35,13 @@ See [CycloneDX official documentation](https://github.com/CycloneDX/cyclonedx-pr
 
 ## `interlynk:component`
 
-| Property Name                      | Description                     |
-| ---------------------------------- | --------------------------------|
-| `interlynk:component:component_id` | Identifier of the component     |
-| `interlynk:component:source`       | Source of the component         |
-| `interlynk:component:source_id`    | Identifier of the source        |
+| Property Name                            | Description                     |
+| -----------------------------------------| --------------------------------|
+| `interlynk:component:component_id`       | Identifier of the component     |
+| `interlynk:component:source`             | Source of the component         |
+| `interlynk:component:source_id`          | Identifier of the source        |
+| `interlynk:component:end_of_support_date`| Component end of support date   |
+| `interlynk:component:support_level`      | Support level of component      |
 
 ## `interlynk:service`
 
