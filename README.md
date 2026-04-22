@@ -4,15 +4,22 @@ This is the official listing of Interlynk's CycloneDX property namespace and tax
 
 See [CycloneDX official documentation](https://github.com/CycloneDX/cyclonedx-property-taxonomy) for additional details.
 
+## Naming convention
+
+All Interlynk property names use `snake_case` for multi-word segments (e.g., `interlynk:build:optimization_level`). Namespace segments are lower-case.
+
 ## `interlynk`
 
-| Namespace                 | Description                                               |
-| --------------------------| --------------------------------------------------------- |
-| `interlynk:sbom`          | Namespace for SBOM document level properties              |
-| `interlynk:metadata`      | Namespace for SBOM metadata level properties              |
-| `interlynk:component`     | Namespace for properties associated with a component      |
-| `interlynk:service`       | Namespace for properties associated with a service        |
-| `interlynk:vulnerability` | Namespace for properties associated with a vulnerability  |
+| Namespace                 | Description                                              |
+| --------------------------| -------------------------------------------------------- |
+| `interlynk:sbom`          | SBOM document level properties                           |
+| `interlynk:metadata`      | SBOM metadata level properties                           |
+| `interlynk:component`     | Properties associated with a component                   |
+| `interlynk:service`       | Properties associated with a service                     |
+| `interlynk:vulnerability` | Properties associated with a vulnerability               |
+| `interlynk:build`         | Build-time metadata affecting the shipped artifact       |
+| `interlynk:linker`        | Post-link ground truth derived from the linker map       |
+| `interlynk:hardware`      | Hardware device attributes (for HBOM components)         |
 
 
 ## `interlynk:sbom`
@@ -55,3 +62,35 @@ See [CycloneDX official documentation](https://github.com/CycloneDX/cyclonedx-pr
 | Property Name                     | Description                      |
 | --------------------------------- | -------------------------------- |
 | `interlynk:vulnerability:fixed_version`  | Version containing the fix|
+
+## `interlynk:build`
+
+Build-time metadata that materially affects the shipped artifact's identity. Typically placed on a `firmware`, `application`, or `library` component.
+
+| Property Name                           | Description                                                                    |
+| ----------------------------------------| ------------------------------------------------------------------------------ |
+| `interlynk:build:toolchain`             | Compiler/linker identifier (e.g., `IAR ICCARM/ILINK`, `GCC arm-none-eabi`)     |
+| `interlynk:build:cpu`                   | Target CPU variant (e.g., `Cortex-M0+`, `Cortex-M4F`)                          |
+| `interlynk:build:endian`                | Target byte order (`little` or `big`)                                          |
+| `interlynk:build:optimization_level`    | Compiler optimization level (e.g., `None`, `Low`, `Medium`, `High-Size`)       |
+| `interlynk:build:output_format`         | Output artifact format (`ELF`, `Intel HEX`, `Binary`, `Motorola S-record`)     |
+
+## `interlynk:linker`
+
+Post-link ground truth derived from a linker map file. Placed on `library` components representing auto-linked runtime archives, or on the primary firmware component.
+
+| Property Name                        | Description                                                                       |
+| -------------------------------------| --------------------------------------------------------------------------------- |
+| `interlynk:linker:archive_name`      | Filename of a statically-linked archive (e.g., `dl6M_tln.a`). Decodes to architecture/endian/variant via toolchain-specific grammar |
+| `interlynk:linker:dlib_abi_version`  | Runtime library ABI version from runtime-model attributes                         |
+| `interlynk:linker:symbol_redirect`   | Linker symbol redirect (e.g., `_Printf=_PrintfLargeNoMb`). Multi-valued           |
+
+## `interlynk:hardware`
+
+Hardware device attributes for `device` components in an HBOM.
+
+| Property Name                   | Description                                                          |
+| --------------------------------| -------------------------------------------------------------------- |
+| `interlynk:hardware:cpu`        | CPU/core variant of the device (e.g., `Cortex-M0+`, `Cortex-M4F`)    |
+| `interlynk:hardware:fpu`        | Floating-point unit variant (e.g., `None`, `VFPv4-SP`)               |
+| `interlynk:hardware:mcu_family` | MCU family identifier (e.g., `STM32L0`, `nRF52`)                     |
